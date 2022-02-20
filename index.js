@@ -413,7 +413,6 @@ node.sset.addEventListener('click', e=>{
 node.xysets.addEventListener('click',() => {
   const x = parseInt(node.xset.value);
   const y = parseInt(node.yset.value);
-  console.log(`xysets click x=${x} y=${y}`);
   if(isNaN(x) || isNaN(y)) {
     console.log('非法数值');
   } else {
