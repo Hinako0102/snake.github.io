@@ -15,12 +15,6 @@ const node= {
   status:qid('status-button'),
   cover:qid('cover')
 }
-let parentWindow = undefined;
-
-if(window.parent !== window) {
-  console.log('parent')
-  parentWindow = window.parent;
-}
 
 const MINX = 8;
 const MINY = 8;
@@ -204,13 +198,6 @@ class Game{
         this.y = y;
   
         this.renderGameArea();
-
-        if(parentWindow) {
-          const event = new Event('gameresize');
-          event.width = this.x*20+40;
-          event.height = this.y*20+180
-          parentWindow.dispatchEvent(event);
-        }
       }
     }
     
