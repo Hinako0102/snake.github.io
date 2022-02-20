@@ -390,7 +390,6 @@ node.status.addEventListener('click',(e) => {
 const handleResize = ()=>{
   const x = Math.floor((document.body.clientWidth -40) / 20);
   const y = Math.floor((document.body.clientHeight -180) / 20);
-  console.log({x,y});
   if(x < game.x || y < game.y) {
     game.resize(x,y);
   }
