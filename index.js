@@ -15,15 +15,11 @@ const node= {
   status:qid('status-button'),
   cover:qid('cover')
 }
+let parentWindow = undefined;
 
 if(window.parent !== window) {
   console.log('parent')
-  const iframes = window.parent.document.querySelectorAll('iframe');
-  for(let ifr of iframes) {
-    if(ifr.contentWindow === window) {
-      node.iframe = ifr;
-    }
-  }
+  parentWindow = window.parent;
 }
 
 const MINX = 8;
@@ -209,11 +205,11 @@ class Game{
   
         this.renderGameArea();
 
-        if(node.iframe) {
+        if(parentWindow) {
           const event = new Event('gameresize');
           event.width = this.x*20+40;
           event.height = this.y*20+180
-          node.iframe.dispatchEvent(event);
+          parentWindow.dispatchEvent(event);
         }
       }
     }
