@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+<head>
+    <title>贪吃蛇</title>
+    <meta charset='utf-8'>
+    <link rel='stylesheet' href='./index.css'>
+</head>
+<body>
+  <main>
+    <textarea id="key-listener" readonly></textarea>
+    <section id='controller'>
+        <div id='setting-menu'>
+            <div id='xy-setting' class="relative">
+                <div id='xy-input' class="inline-block">
+                    <div class='setting' id='x-setting'>
+                        <label class='setting-label' for='x-setting-input'>宽度：</label>
+                        <input class='setting-input' type='number' value="60" id='x-setting-input'>
+                    </div>
+
+                    <div class='setting' id='y-setting'>
+                        <label class='setting-label' for='y-setting-input'>高度：</label>
+                        <input class='setting-input' type='number' value="60" id='y-setting-input'>
+                    </div>
+                </div>
+                <input class='setting-button' type='button' id='xy-setting-button' value='确认'>
+            </div>
+
+            <div id='speed-setting' class="relative">
+                <label class='setting-label' for='speed-setting-input'>速度：</label>
+                <input class='setting-input' type='number' value="20" id='speed-setting-input'>
+                <input class='setting-button' type='button' id='speed-setting-button' value='确认'>
+            </div>
+        </div>
+
+        <div id='status-bar'>
+            <input id='status-button' type='button' value='开始'>
+        </div>
+    </section>
+
+            
+
+    <section id='game-area'>
+                <!--<div class='game_area_resize' id='game_area_x_resize'></div>
+                <div class='game_area_resize' id='game_area_y_resize'></div>
+                <div class='game_area_resize' id='game_area_xy_resize'></div>-->
+    </section>
+    <div id='cover'></div>
+  </main>
+  <script src='./index.js'></script>
+</body>
+</html>
