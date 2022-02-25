@@ -30,7 +30,7 @@ class Game{
   }
 
   new(){
-    console.log('new');
+    //console.log('new');
     node.cnt.innerHTML = '开始';
 
     if(this.snake) {
@@ -61,7 +61,7 @@ class Game{
     this.render();
   }
   run(){
-    console.log('run');
+    //console.log('run');
     node.cnt.innerHTML = '暂停';
 
     if(this.runable) {
@@ -86,7 +86,7 @@ class Game{
     }
   }
   over(){
-    console.log('over');
+    //console.log('over');
     this.runing = false;
     this.runable = false;
     node.cnt.innerHTML = '重新开始';
@@ -223,7 +223,7 @@ class Snake{
   }
 
   turn(value) {
-    console.log('turn');
+    //console.log('turn');
     if(value !== -this.prevDerection || this.body.length === 1) {
       this.derection = value;
       switch(value) {
