@@ -4,12 +4,13 @@ const random = (max) => {
   return Math.floor(Math.random() * max);
 }
 
+const randomColor = () => {
+  return `hsl(${random(360)},${random(30)+70}%,${random(50)+30}%)`;
+}
+
 const node= {
   keyListener:qid('key-listener'),
-  xset:qid('x-setting-input'),
-  yset:qid('y-setting-input'),
   sset:qid('speed-setting-input'),
-  xysets:qid('xy-setting-button'),
   ssets:qid('speed-setting-button'),
   ga:qid('game-area'),
   status:qid('status-button'),
@@ -22,6 +23,10 @@ const UINTSIZE = 20;
 
 class Game{
   constructor(){
+    const {x,y} = getXY();
+    console.log(getXY);
+    this.x = x;
+    this.y = y;
   }
 
   new(){
@@ -34,9 +39,6 @@ class Game{
     if(this.food) {
       this.food.clear();
     }
-
-    this.x = node.xset.value;
-    this.y = node.yset.value;
     this.renderGameArea();
 
     this.speed = node.sset.value;
@@ -143,14 +145,6 @@ class Game{
     y = parseInt(y);
     if(isNaN(x) || isNaN(y)) {
     } else {
-      const maxx = Math.floor((document.body.clientWidth -40) / 20);
-      const maxy = Math.floor((document.body.clientHeight -180) / 20);
-
-      x = x>maxx ? maxx : x;
-      y = y>maxy?maxy:y;
-
-      x = x<MINX?MINX:x;
-      y= y<MINY?MINY:y;
 
       if(x !== this.x || y!== this.y) {
         if(this.runable) {
@@ -198,11 +192,16 @@ class Game{
         this.y = y;
   
         this.renderGameArea();
+
+        if(node.iframe) {
+          const event = new Event('gameresize');
+          event.width = this.x*20+40;
+          event.height = this.y*20+180
+          node.iframe.dispatchEvent(event);
+        }
       }
     }
     
-    node.xset.value = this.x;
-    node.yset.value = this.y;
 
     console.log(`set x=${this.x} y=${this.y}`);
   }
@@ -333,6 +332,7 @@ class Food{
     this.node = FoodTemplate.cloneNode();
     this.node.style.width = `${UINTSIZE}px`;
     this.node.style.height = `${UINTSIZE}px`;
+    this.node.style.setProperty('--color',randomColor());
     node.ga.appendChild(this.node);
   }
 
@@ -351,6 +351,12 @@ SnakeBodyTemplate.classList.add('snake-body');
 
 const FoodTemplate = document.createElement('div');
 FoodTemplate.classList.add('food');
+
+const getXY = () => {
+  const x = Math.floor((document.body.clientWidth -40) / 20);
+  const y = Math.floor((document.body.clientHeight -140) / 20);
+  return {x,y};
+}
 
 const game = new Game();
 game.new();
@@ -388,38 +394,13 @@ node.status.addEventListener('click',(e) => {
 })
 
 const handleResize = ()=>{
-  const x = Math.floor((document.body.clientWidth -40) / 20);
-  const y = Math.floor((document.body.clientHeight -180) / 20);
-  if(x < game.x || y < game.y) {
-    game.resize(x,y);
-  }
+  const {x,y} = getXY();
+  game.resize(x,y);
 }
-
-node.xset.addEventListener('click',e=>{
-  e.stopPropagation();
-  game.pause();
-})
-
-node.yset.addEventListener('click', e=>{
-  e.stopPropagation();
-  game.pause();
-})
 
 node.sset.addEventListener('click', e=>{
   e.stopPropagation();
   game.pause();
-})
-
-node.xysets.addEventListener('click',() => {
-  const x = parseInt(node.xset.value);
-  const y = parseInt(node.yset.value);
-  if(isNaN(x) || isNaN(y)) {
-    console.log('非法数值');
-  } else {
-    game.resize(x,y);
-  }
-  node.xset.value = game.x;
-  node.yset.value = game.y;
 })
 
 node.ssets.addEventListener('click',()=>{
