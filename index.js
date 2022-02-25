@@ -14,6 +14,7 @@ const node= {
   ssets:qid('speed-setting-button'),
   ga:qid('game-area'),
   status:qid('status-button'),
+  cnt:qid('cn-text'),
   cover:qid('cover')
 }
 
@@ -31,7 +32,7 @@ class Game{
 
   new(){
     console.log('new');
-    node.status.value = '开始';
+    node.cnt.innerHTML = '开始';
 
     if(this.snake) {
       this.snake.clear();
@@ -62,7 +63,7 @@ class Game{
   }
   run(){
     console.log('run');
-    node.status.value = '暂停';
+    node.cnt.innerHTML = '暂停';
 
     if(this.runable) {
       let preTimestamp = Date.now();
@@ -89,11 +90,11 @@ class Game{
     console.log('over');
     this.runing = false;
     this.runable = false;
-    node.status.value = '重新开始';
+    node.cnt.innerHTML = '重新开始';
   }
   pause(){
     this.runing = false;
-    node.status.value = '开始';
+    node.cnt.innerHTML = '开始';
   }
 
   doRun(){
