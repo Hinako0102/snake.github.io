@@ -53,7 +53,8 @@ body {
   width: 100vw;
   height: 100vh;
   overflow: hidden;
-  min-width: 300px;  
+  min-width: 300px;
+  min-height: 200px;
 }
 
 main {
