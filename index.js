@@ -193,13 +193,6 @@ class Game{
         this.y = y;
   
         this.renderGameArea();
-
-        if(node.iframe) {
-          const event = new Event('gameresize');
-          event.width = this.x*20+40;
-          event.height = this.y*20+180
-          node.iframe.dispatchEvent(event);
-        }
       }
     }
     
