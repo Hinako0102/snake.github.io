@@ -194,9 +194,6 @@ class Game{
         this.renderGameArea();
       }
     }
-    
-
-    console.log(`set x=${this.x} y=${this.y}`);
   }
 }
 
@@ -358,7 +355,6 @@ node.keyListener.addEventListener('keydown',(e) => {
   if(e.key === ' ') {
     node.status.click();
   } else if(game.runing) {
-    console.log(e.key);
     switch(e.key) {
       case 'ArrowUp':
         game.snake.turn(UP);
