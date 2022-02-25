@@ -25,7 +25,6 @@ const UINTSIZE = 20;
 class Game{
   constructor(){
     const {x,y} = getXY();
-    console.log(getXY);
     this.x = x;
     this.y = y;
   }
